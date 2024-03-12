@@ -1,35 +1,93 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Login from './components/Login'
 import Videos from './components/Videos'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
-  const [authState, setAuthState] = useState('not_authorized')
+  const [userInfoState, setUserInfoState] = useState<{
+    email: string
+    user_id: string
+  } | null>(null)
+
+  const handleLogout = () => {}
+  const handleChangePassword = () => {}
   useEffect(() => {
     if (typeof window === 'undefined') return
     const accessToken = localStorage.getItem('access_token')
     if (accessToken && accessToken.length > 0) {
-      setAuthState('authorized')
+      setUserInfoState({
+        email: localStorage.getItem('email') || '',
+        user_id: localStorage.getItem('user_id') || ''
+      })
     } else {
-      setAuthState('not_authorized')
+      setUserInfoState(null)
     }
-  })
+  }, [])
+
   return (
-    <div>
-      {authState === 'not_authorized' ? (
+    <div className='m-100'>
+      {userInfoState == null ? (
         <div>
           <Login
-            onLogin={(token) => {
-              console.log(`onLogin from Main Page ${token}`)
+            onLogin={(params) => {
+              console.log(params)
+              const { access_token, email, user_id } = params
+              console.log(`onLogin from Main Page ${access_token} ${email} ${user_id}`)
+              localStorage.setItem('access_token', access_token)
+              localStorage.setItem('email', email)
+              localStorage.setItem('user_id', user_id)
+              setUserInfoState({ email, user_id })
             }}
           />
         </div>
       ) : (
-        <div>
-          <Videos />
-        </div>
+        <>
+          <div>
+            {userInfoState ? (
+              <>
+                <Card className='w-[420px]'>
+                  <CardHeader>
+                    <CardTitle>User's Information</CardTitle>
+                    <CardDescription>Thanks for using our amazing Youtube Share Service.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div>
+                      <p>ID: {userInfoState.user_id}</p>
+                      <p>Email: {userInfoState.email}</p>
+                      <div className='flex justify-end'>
+                        <Button
+                          className='mt-4 mr-4'
+                          variant='secondary'
+                          size='default'
+                          onClick={() => {
+                            handleChangePassword
+                          }}
+                        >
+                          Change Password
+                        </Button>
+
+                        <Button
+                          className='mt-4'
+                          variant='destructive'
+                          size='default'
+                          onClick={() => {
+                            handleLogout
+                          }}
+                        >
+                          Logout
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </>
+            ) : null}
+            <Videos />
+          </div>
+        </>
       )}
     </div>
   )

@@ -10,7 +10,14 @@ import dotenv from 'dotenv'
 dotenv.config()
 console.log(process.env.NEXT_PUBLIC_SERVER_URL)
 
-export default function Login({ onLogin }: { onLogin: (accessToken: string) => void }) {
+export default function Login({
+  onLogin
+}: {
+  // Cache the token for auth later
+  // Cache user_id, email to query info later
+  // Cache all them in localStorage
+  onLogin: (params: { access_token: string; email: string; user_id: string }) => void
+}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -35,9 +42,12 @@ export default function Login({ onLogin }: { onLogin: (accessToken: string) => v
         email,
         password
       })
+      console.log(response)
       const responseJson = response.data
-      const accessToken = responseJson.access_token
-      onLogin(accessToken)
+      const access_token = responseJson.data.access_token
+      const user_id = responseJson.data.user_id
+      const user_email = responseJson.data.email
+      onLogin({ access_token, user_id, email: user_email })
     } catch (error) {
       console.error(error)
     }
@@ -49,7 +59,7 @@ export default function Login({ onLogin }: { onLogin: (accessToken: string) => v
 
   return (
     <div className='p-4'>
-      <h1 className='p-4'>Youtube Share Urls Login Section</h1>
+      <h1 className='p-4'>Youtube Share Urls Login</h1>
       <div className='flex items-center space-x-2 m-2'>
         <RadioGroup
           defaultValue={authUIState === 'login' ? 'login' : authUIState === 'signup' ? 'signup' : 'login'}
