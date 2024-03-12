@@ -70,7 +70,13 @@ export default function Page() {
         <a href={'/users/' + (typeof window !== 'undefined' ? localStorage.getItem('user_id') : '')} className='pb-4'>
           Your Email: {email}
         </a>
-        <Input className='mb-2' type='text' placeholder='Video URL' value={videoUrl} onChange={handleVideoUrlChange} />
+        <Input
+          className='mb-2 mt-10'
+          type='text'
+          placeholder='Video URL'
+          value={videoUrl}
+          onChange={handleVideoUrlChange}
+        />
         <Input
           className='mb-2'
           type='text'

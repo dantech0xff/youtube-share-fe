@@ -76,6 +76,7 @@ export default function Home() {
                   <CardContent>
                     <div>
                       <a href={'/users/' + userInfoState.user_id}>ID: {userInfoState.user_id}</a>
+                      <br />
                       <a href={'/users/' + userInfoState.user_id}>Email: {userInfoState.email}</a>
                       <div className='flex justify-end'>
                         <Button
