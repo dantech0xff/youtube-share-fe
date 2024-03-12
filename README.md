@@ -2,11 +2,12 @@
 
 This project is a Video Sharing Platform to showcase my coding skill as a fullstack engineer.
 
-Visit my app: https://youtube-share-fe.vercel.app/
+Visit my app: <https://youtube-share-fe.vercel.app/>
 
-Test account: testuser1@gmail.com
+Test account: <testuser1@gmail.com>
+Test pw: 123123
 
-[![Introduce and showcase the Project](/mq2.webp)](https://www.youtube.com/watch?v=ieXKWpE066s)
+[![Video Introduce and showcase the Project](/demo.jpeg)](https://www.youtube.com/watch?v=ieXKWpE066s 'Video Introduce and showcase the Project')
 
 ### Key Features
 
