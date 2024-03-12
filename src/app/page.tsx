@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Videos from './components/Videos'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { userInfo } from 'os'
 
 export default function Home() {
   const [userInfoState, setUserInfoState] = useState<{
@@ -69,8 +70,8 @@ export default function Home() {
                   </CardHeader>
                   <CardContent>
                     <div>
-                      <p>ID: {userInfoState.user_id}</p>
-                      <p>Email: {userInfoState.email}</p>
+                      <a href={'/users/' + userInfoState.user_id}>ID: {userInfoState.user_id}</a>
+                      <a href={'/users/' + userInfoState.user_id}>Email: {userInfoState.email}</a>
                       <div className='flex justify-end'>
                         <Button
                           className='mt-4 mr-4'

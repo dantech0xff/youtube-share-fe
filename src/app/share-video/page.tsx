@@ -42,7 +42,7 @@ export default function Page() {
       setVideoUrl('')
       setTitle('')
       setDescription('')
-      setErrorText('Video Shared!')
+      setErrorText('Video Shared Successfully!')
       console.log(response)
     } catch (error: any) {
       setErrorText(`Error: ${JSON.stringify(error.response)}`)
@@ -66,7 +66,9 @@ export default function Page() {
         </Button>
 
         <div className='flex items-center space-x-2 m-2'> </div>
-        <h2 className='pb-4'>Your Email: {email}</h2>
+        <a href={'/users/' + localStorage.getItem('user_id')} className='pb-4'>
+          Your Email: {email}
+        </a>
         <Input className='mb-2' type='text' placeholder='Video URL' value={videoUrl} onChange={handleVideoUrlChange} />
         <Input
           className='mb-2'
