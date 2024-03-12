@@ -53,8 +53,21 @@ export default function Login({
     }
   }
 
-  const handleSignUp = () => {
-    console.log('Sign Up')
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/register`, {
+        email,
+        password
+      })
+      const data = response.data.data
+      console.log(data)
+      const access_token = data.access_token
+      const user_id = data.user_id
+      const user_email = data.email
+      onLogin({ access_token, user_id, email: user_email })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -87,7 +100,7 @@ export default function Login({
           className='mb-2'
           type='password'
           placeholder='Confirm Password'
-          value={password}
+          value={confirmPassword}
           onChange={handleConfirmPasswordChange}
         />
       ) : null}

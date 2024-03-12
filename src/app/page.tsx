@@ -12,7 +12,13 @@ export default function Home() {
     user_id: string
   } | null>(null)
 
-  const handleLogout = () => {}
+  const handleLogout = () => {
+    console.log('Logout')
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('email')
+    localStorage.removeItem('user_id')
+    setUserInfoState(null)
+  }
   const handleChangePassword = () => {}
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -63,7 +69,7 @@ export default function Home() {
                           variant='secondary'
                           size='default'
                           onClick={() => {
-                            handleChangePassword
+                            handleChangePassword()
                           }}
                         >
                           Change Password
@@ -74,7 +80,7 @@ export default function Home() {
                           variant='destructive'
                           size='default'
                           onClick={() => {
-                            handleLogout
+                            handleLogout()
                           }}
                         >
                           Logout
