@@ -6,13 +6,14 @@ export default function Videos({ user_id }: { user_id: string }) {
   const requestUserId = user_id
   const [videoList, setVideoList] = useState<
     {
-      _id: string
+      id: string
       views: number
       user_id: string
       url: string
       create_at: string
       title: string
       description: string
+      email: string
     }[]
   >([])
 
@@ -29,13 +30,15 @@ export default function Videos({ user_id }: { user_id: string }) {
             limit: 10
           }
         })
+
+        console.log(response.data)
         const videos = response.data.data.videos
         const nextIndex = response.data.data.nextIndex
         const total = response.data.data.total
         setVideoList((prevVideoList) => {
           const ret = [...prevVideoList, ...videos]
-          const uniqueVideos = Array.from(new Set(ret.map((video) => video._id))).map((id) => {
-            return ret.find((video) => video._id === id)
+          const uniqueVideos = Array.from(new Set(ret.map((video) => video.id))).map((id) => {
+            return ret.find((video) => video.id === id)
           })
           return uniqueVideos
         })
@@ -55,10 +58,10 @@ export default function Videos({ user_id }: { user_id: string }) {
       <div className='pt-2'>
         {videoList.map((video) => {
           return (
-            <div key={video._id} className='pt-2'>
+            <div key={video.id} className='pt-2'>
               <Card className='p-2'>
                 <div className='flex justify-start'>
-                  <a href={'/users/' + video.user_id}> Uploaded by {video.user_id}</a>
+                  <a href={'/users/' + video.user_id}> Uploaded by: {video.email}</a>
                 </div>
                 <h2 className='font-bold'>Title: {video.title}</h2>
 
