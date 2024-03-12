@@ -9,6 +9,8 @@ Test pw: 123123
 
 [![Video Introduce and showcase the Project](/demo.jpeg)](https://www.youtube.com/watch?v=ieXKWpE066s 'Video Introduce and showcase the Project')
 
+Clicking on the Video to view
+
 ### Key Features
 
 - Login / Signup / Logout
