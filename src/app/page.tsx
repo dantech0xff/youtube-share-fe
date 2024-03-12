@@ -19,7 +19,11 @@ export default function Home() {
     localStorage.removeItem('user_id')
     setUserInfoState(null)
   }
-  const handleChangePassword = () => {}
+  const handleChangePassword = () => {
+    // Direct to change-password route
+    // You can use the history object to navigate to the change-password route
+    window.location.href = '/change-password'
+  }
   useEffect(() => {
     if (typeof window === 'undefined') return
     const accessToken = localStorage.getItem('access_token')
@@ -91,7 +95,7 @@ export default function Home() {
                 </Card>
               </>
             ) : null}
-            <Videos />
+            <Videos user_id='' />
           </div>
         </>
       )}

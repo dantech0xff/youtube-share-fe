@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Card } from '@/components/ui/card'
 
-export default function Videos() {
+export default function Videos({ user_id }: { user_id: string }) {
+  const requestUserId = user_id
   const [videoList, setVideoList] = useState<
     {
       _id: string
@@ -18,7 +19,11 @@ export default function Videos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/videos`, {
+        let pathRequest = `${process.env.NEXT_PUBLIC_SERVER_URL}/videos`
+        if (requestUserId && requestUserId.length > 0) {
+          pathRequest = `${process.env.NEXT_PUBLIC_SERVER_URL}/videos/user/${user_id}`
+        }
+        const response = await axios.get(pathRequest, {
           params: {
             startIndex: 0,
             limit: 10

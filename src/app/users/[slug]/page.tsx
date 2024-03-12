@@ -1,4 +1,5 @@
 'use client'
+import Videos from '@/app/components/Videos'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import axios from 'axios'
@@ -16,19 +17,20 @@ export default function Page({ params }: { params: { slug: string } }) {
     const fetchData = async () => {
       try {
         const accessToken = localStorage.getItem('access_token')
-        const response = await axios.get(`/users`, {
+        console.log({
+          accessToken,
+          user_id
+        })
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/${user_id}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`
-          },
-          params: {
-            user_id
           }
         })
         console.log(response.data)
-        // setUserInfoState(response.data)
+        setUserInfoState(response.data.data)
       } catch (error) {
         console.error('Error fetching user information:', error)
-        // setUserInfoState(null)
+        setUserInfoState(null)
       }
     }
 
@@ -72,6 +74,8 @@ export default function Page({ params }: { params: { slug: string } }) {
             </>
           )}
         </Card>
+
+        <Videos user_id={user_id} />
       </div>
     </>
   )
