@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 export default function Page() {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(localStorage.getItem('email') || '')
   const [password, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -27,9 +27,6 @@ export default function Page() {
     console.log(respose)
   }
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
@@ -43,10 +40,11 @@ export default function Page() {
   return (
     <>
       <div className='p-4'>
-        <h1 className='p-4'>Youtube Share Urls Change Password</h1>
+        <Button size={'lg'} variant={'outline'} onClick={() => {}}>
+          Home
+        </Button>
         <div className='flex items-center space-x-2 m-2'> </div>
-
-        <Input className='mb-2' type='email' placeholder='Email' value={email} onChange={handleEmailChange} />
+        <h2 className='pb-4'>Your Email: {email}</h2>
         <Input
           className='mb-2'
           type='password'
@@ -57,14 +55,14 @@ export default function Page() {
         <Input
           className='mb-2'
           type='password'
-          placeholder='Password'
+          placeholder='New Password'
           value={newPassword}
           onChange={handleNewPasswordChange}
         />
         <Input
           className='mb-2'
           type='password'
-          placeholder='Confirm Password'
+          placeholder='Confirm New Password'
           value={confirmNewPassword}
           onChange={handleConfirmNewPasswordChange}
         />
