@@ -22,6 +22,7 @@ export default function Login({
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [authUIState, setAuthUIState] = useState('login') // ['login', 'signup']
+  const [errorText, setErrorText] = useState('')
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -38,6 +39,7 @@ export default function Login({
 
   const handleLogin = async () => {
     try {
+      setErrorText('')
       const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/login`, {
         email,
         password
@@ -48,8 +50,9 @@ export default function Login({
       const user_id = responseJson.data.user_id
       const user_email = responseJson.data.email
       onLogin({ access_token, user_id, email: user_email })
-    } catch (error) {
+    } catch (error: any) {
       console.error(error)
+      setErrorText('Error: ' + JSON.stringify(error.response))
     }
   }
 
@@ -111,6 +114,7 @@ export default function Login({
       >
         {authUIState === 'signup' ? 'Sign Up' : 'Login'}
       </Button>
+      {errorText && <div className='text-red-500'>{errorText}</div>}
     </div>
   )
 }

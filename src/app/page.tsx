@@ -24,6 +24,10 @@ export default function Home() {
     // You can use the history object to navigate to the change-password route
     window.location.href = '/change-password'
   }
+  const handleShareVideo = () => {
+    window.location.href = '/share-video'
+  }
+
   useEffect(() => {
     if (typeof window === 'undefined') return
     const accessToken = localStorage.getItem('access_token')
@@ -68,6 +72,15 @@ export default function Home() {
                       <p>ID: {userInfoState.user_id}</p>
                       <p>Email: {userInfoState.email}</p>
                       <div className='flex justify-end'>
+                        <Button
+                          className='mt-4 mr-4'
+                          size='default'
+                          onClick={() => {
+                            handleShareVideo()
+                          }}
+                        >
+                          Share Video
+                        </Button>
                         <Button
                           className='mt-4 mr-4'
                           variant='secondary'
