@@ -26,6 +26,7 @@ export default function WrapperComponent({
         }
       })
     })
+    appSocketClient.connect()
     return () => {
       appSocketClient.disconnect()
     }
