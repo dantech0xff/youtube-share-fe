@@ -6,6 +6,7 @@ import Videos from './components/Videos'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { userInfo } from 'os'
+import appSocketClient from './AppSocketClient'
 
 export default function Home() {
   const [userInfoState, setUserInfoState] = useState<{
@@ -19,6 +20,7 @@ export default function Home() {
     localStorage.removeItem('email')
     localStorage.removeItem('user_id')
     setUserInfoState(null)
+    appSocketClient.disconnect()
   }
   const handleChangePassword = () => {
     // Direct to change-password route
@@ -55,6 +57,7 @@ export default function Home() {
               localStorage.setItem('email', email)
               localStorage.setItem('user_id', user_id)
               setUserInfoState({ email, user_id })
+              appSocketClient.connect()
             }}
           />
         </div>
