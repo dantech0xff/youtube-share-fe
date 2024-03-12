@@ -4,6 +4,7 @@ class AppSocketClient {
   socket: any
   newNotificationHandler: (data: any) => void = () => {}
   getAccessToken(): string {
+    if (typeof window === 'undefined') return ''
     return `Bearer ${localStorage.getItem('access_token')}`
   }
 

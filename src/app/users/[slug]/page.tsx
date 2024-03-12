@@ -18,6 +18,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const followUserId = async (user_id: string) => {
     setIsProcessing(true)
     try {
+      if (typeof window === 'undefined') return
       const accessToken = localStorage.getItem('access_token')
       console.log({
         accessToken,
@@ -50,6 +51,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const unfollowUserId = async (user_id: string) => {
     setIsProcessing(true)
     try {
+      if (typeof window === 'undefined') return
       const accessToken = localStorage.getItem('access_token')
       console.log({
         accessToken,
@@ -83,6 +85,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (typeof window === 'undefined') return
+
         const accessToken = localStorage.getItem('access_token')
         console.log({
           accessToken,

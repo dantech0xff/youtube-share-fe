@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 export default function Page() {
-  const [email, setEmail] = useState(localStorage.getItem('email') || '')
+  const [email, setEmail] = useState(typeof window !== undefined ? localStorage.getItem('email') : '' || '')
   const [password, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -23,7 +23,7 @@ export default function Page() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
+            Authorization: `Bearer ${typeof window !== undefined ? localStorage.getItem('access_token') : '' || ''}`
           }
         }
       )

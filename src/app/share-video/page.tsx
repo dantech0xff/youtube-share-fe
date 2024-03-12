@@ -6,7 +6,7 @@ import axios, { Axios, AxiosError } from 'axios'
 import { useState } from 'react'
 
 export default function Page() {
-  const [email, setEmail] = useState(localStorage.getItem('email') || '')
+  const [email, setEmail] = useState(typeof window !== 'undefined' ? localStorage.getItem('email') : '' || '')
   const [videoUrl, setVideoUrl] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -22,6 +22,7 @@ export default function Page() {
 
   const handleSubmitShareVideo = async () => {
     try {
+      if (typeof window === 'undefined') return
       setErrorText('')
       setIsProcessing(true)
       console.log('Submit Share Video')
@@ -35,7 +36,7 @@ export default function Page() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
+            Authorization: `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('access_token') : ''}`
           }
         }
       )
@@ -66,7 +67,7 @@ export default function Page() {
         </Button>
 
         <div className='flex items-center space-x-2 m-2'> </div>
-        <a href={'/users/' + localStorage.getItem('user_id')} className='pb-4'>
+        <a href={'/users/' + (typeof window !== 'undefined' ? localStorage.getItem('user_id') : '')} className='pb-4'>
           Your Email: {email}
         </a>
         <Input className='mb-2' type='text' placeholder='Video URL' value={videoUrl} onChange={handleVideoUrlChange} />

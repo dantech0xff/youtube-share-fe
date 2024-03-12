@@ -16,11 +16,12 @@ export default function Home() {
 
   const handleLogout = () => {
     console.log('Logout')
+    appSocketClient.disconnect()
+    if (typeof window === 'undefined') return
     localStorage.removeItem('access_token')
     localStorage.removeItem('email')
     localStorage.removeItem('user_id')
     setUserInfoState(null)
-    appSocketClient.disconnect()
   }
   const handleChangePassword = () => {
     // Direct to change-password route
@@ -51,6 +52,7 @@ export default function Home() {
           <Login
             onLogin={(params) => {
               console.log(params)
+              if (typeof window === 'undefined') return
               const { access_token, email, user_id } = params
               console.log(`onLogin from Main Page ${access_token} ${email} ${user_id}`)
               localStorage.setItem('access_token', access_token)
