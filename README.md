@@ -4,7 +4,7 @@ This project is a Video Sharing Platform to showcase my coding skill as a fullst
 
 Visit my app: <https://youtube-share-fe.vercel.app/>
 
-Test account: <testuser1@gmail.com>
+Test account: <testuser1@gmail.com> <testuser2@gmail.com>
 Test pw: 123123
 
 [![Video Introduce and showcase the Project](/demo.jpeg)](https://www.youtube.com/watch?v=ieXKWpE066s 'Video Introduce and showcase the Project')
@@ -29,6 +29,15 @@ Please install the environment that match the list below for better development 
 ### Start the Web
 
 Run `npm run dev`
+
+### Deploy on Vercel
+
+- Fork the project to your github account
+- Login to Vercel
+- Select `Add New Project`
+- Select Import from Git & Choose the forked project
+- Deploy the project & REMEMBER TO SET THE VARIABLES IN .ENV TO YOUR DEPLOYMENT
+- Enjoy the app
 
 ### How to use
 
