@@ -68,8 +68,9 @@ export default function Login({
       const user_id = data.user_id
       const user_email = data.email
       onLogin({ access_token, user_id, email: user_email })
-    } catch (error) {
+    } catch (error: any) {
       console.error(error)
+      setErrorText('Error: ' + JSON.stringify(error.response))
     }
   }
 
