@@ -1,4 +1,4 @@
-## Welcome to Youtube Share FE Project
+# Welcome to Youtube Share FE Project
 
 This project is a Video Sharing Platform to showcase my coding skill as a fullstack engineer.
 
@@ -33,3 +33,8 @@ Run `npm run dev`
 ### How to use
 
 Visit my video for more information: <https://www.youtube.com/watch?v=ieXKWpE066s>
+
+### Common issues
+
+- The value for .env should be start with NEXT_PUBLIC\_ to be accessible
+- The infinite loading feature is not developed yet
